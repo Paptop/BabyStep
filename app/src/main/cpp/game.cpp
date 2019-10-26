@@ -146,10 +146,19 @@ void on_surface_created() {
     glEnable(GL_DEPTH_TEST);
     // Accept fragment if it closer to the camera than the former one
     glDepthFunc(GL_LESS);
+
+    Vector3f pos(0.0f, 0.0f, 2.0f);
+    Vector3f tar(0.0f, 0.0f, 1.0f);
+    Vector3f up(0.0f, 1.0f, 0.0f);
+
+    pipeline.SetCamera(pos, tar, up);
 }
 
-void on_surface_changed() {
+void on_surface_changed(int width, int height) {
     // No-op
+    SProjection& proj = pipeline.GetProjection();
+    proj.m_width = width;
+    proj.m_height = height;
 }
 
 void on_draw_frame() {
@@ -159,9 +168,9 @@ void on_draw_frame() {
     static float fScale = 0.0f;
     fScale += 0.01f;
 
-    pipeline.WorldPos(sinf(fScale), 0.0f, 0.0f);
-    pipeline.Scale(sinf(fScale * 0.1f), sinf(fScale * 0.1f), sinf(fScale * 0.1f));
-    pipeline.Rotate(sinf(fScale) * 90.0f, sinf(fScale) * 90.0f, sinf(fScale) * 90.0f);
+    pipeline.WorldPos(0.0f, 0.0f, -1.5f);
+    //pipeline.Scale(sinf(fScale * 0.1f), sinf(fScale * 0.1f), sinf(fScale * 0.1f));
+    pipeline.Rotate(-120.0f, sinf(fScale) * 360.0f ,0.0f);
     const Matrix4f* trans = pipeline.GetTrans();
 
     GLuint pos = glGetUniformLocation(shaderProgram,"gScale");
@@ -182,3 +191,7 @@ void on_draw_frame() {
     glDrawElements(GL_TRIANGLES, 18, GL_UNSIGNED_INT, 0);
 }
 
+void on_touch_down(int x, int y)
+{
+
+}

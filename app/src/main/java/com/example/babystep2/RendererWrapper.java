@@ -10,7 +10,7 @@ public class RendererWrapper implements Renderer {
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config){
-        GameLibJNIWrapper.on_surface_created();//glClearColor(0.0f,0.0f,1.0f,0.0f);
+        GameLibJNIWrapper.on_surface_created();
     }
 
     @Override

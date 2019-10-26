@@ -12,7 +12,7 @@ public:
 
 private:
     FT_Library m_library;
-};
+};          
 
 
 #endif //BABYSTEP2_EXFREETYPE_H
